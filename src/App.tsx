@@ -1,4 +1,5 @@
 import { useState } from "react";
+import HeartBurst from "./HeartBurst";
 import "./App.css";
 
 type Stage = "question" | "envelope" | "open";
@@ -41,6 +42,8 @@ function App() {
     return (
       <div className="center">
         <h1>You said YES 💌</h1>
+
+        {isOpen && <HeartBurst />}
 
         <div
           className={`envelope-wrapper ${isOpen ? "open" : ""}`}

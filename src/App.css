@@ -109,3 +109,29 @@ button:hover {
   font-size: 14px;
   opacity: 0.7;
 }
+
+
+.heart-burst {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
+}
+
