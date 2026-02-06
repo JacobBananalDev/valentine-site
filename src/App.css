@@ -29,3 +29,26 @@ button:hover {
 .no {
   background: white;
 }
+
+.envelope {
+  margin-top: 30px;
+  width: 200px;
+  height: 120px;
+  background: white;
+  border: 2px solid #e63946;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: bounce 1.2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
