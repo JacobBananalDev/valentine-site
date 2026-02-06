@@ -6,15 +6,13 @@ type Stage = "question" | "envelope" | "open";
 function App() {
   const [stage, setStage] = useState<Stage>("question");
   const [noPosition, setNoPosition] = useState({ top: "0px", left: "0px" });
+  const [isOpen, setIsOpen] = useState(false);
 
   const moveNoButton = () => {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 200 - 100;
 
-    setNoPosition({
-      left: `${x}px`,
-      top: `${y}px`,
-    });
+    setNoPosition({ left: `${x}px`, top: `${y}px` });
   };
 
   if (stage === "question") {
@@ -30,11 +28,7 @@ function App() {
           <button
             className="no"
             onMouseEnter={moveNoButton}
-            style={{
-              position: "relative",
-              left: noPosition.left,
-              top: noPosition.top,
-            }}
+            style={{ position: "relative", ...noPosition }}
           >
             No 💔
           </button>
@@ -47,9 +41,25 @@ function App() {
     return (
       <div className="center">
         <h1>You said YES 💌</h1>
-        <div className="envelope" onClick={() => setStage("open")}>
-          Click to open ✉️
+
+        <div
+          className={`envelope-wrapper ${isOpen ? "open" : ""}`}
+          onClick={() => {
+            if (!isOpen) setIsOpen(true);
+            else setStage("open");
+          }}
+        >
+          <div className="envelope">
+            <div className="flap" />
+            <div className="letter">
+              <p>For you ❤️</p>
+            </div>
+          </div>
         </div>
+
+        <p className="hint">
+          {isOpen ? "Tap again 💖" : "Click to open ✉️"}
+        </p>
       </div>
     );
   }
