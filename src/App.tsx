@@ -71,11 +71,10 @@ export default function App() {
         <div className={`letter ${open ? "show" : ""}`}>
           <p className="letter-title">My Valentine 💖</p>
           <p>
-            I’m so grateful for you and everything we share.
-            You make my days brighter, my laughs louder,
-            and my life better just by being in it.
+            Dear Sitarah,
+            I’m grateful every single day to have such a beautiful, funny, wonderful, smart (and sometimes dumb 😄), and fun girlfriend. You’ve always been there for me, and I love all the things you do for me. You always know how to make me feel better, especially when I’m having a bad day. I truly couldn’t ask for someone better, someone who motivates me and somehow always knows how to push my buttons. I’m so lucky to have you. I love you, bb 💖
           </p>
-          <p>Will you be my Valentine — today and always? ❤️</p>
+          <p>Will you be my Valentine? ❤️</p>
 
           <img src={dogPic} alt="Her dog" className="dog-pic" />
         </div>
