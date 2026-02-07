@@ -1,7 +1,26 @@
+/* ---------- BASE ---------- */
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f9c5d1, #fbc2a4);
+}
+
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   margin-bottom: 20px;
 }
+
+/* ---------- BUTTONS ---------- */
 
 .buttons {
   display: flex;
@@ -14,11 +33,6 @@ button {
   border-radius: 14px;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.25);
 }
 
 .yes {
@@ -30,108 +44,144 @@ button:hover {
   background: white;
 }
 
-.envelope {
-  margin-top: 30px;
-  width: 200px;
-  height: 120px;
-  background: white;
-  border: 2px solid #e63946;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  animation: bounce 1.2s infinite;
-}
+/* ---------- HEARTS ---------- */
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.envelope-wrapper {
-  margin-top: 30px;
-  cursor: pointer;
-}
-
-.envelope {
-  position: relative;
-  width: 220px;
-  height: 140px;
-  background: #fff;
-  border-radius: 6px;
-  border: 2px solid #e63946;
-  overflow: hidden;
-}
-
-.flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: #e63946;
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  transform-origin: top;
-  transition: transform 0.6s ease;
-  z-index: 3;
-}
-
-.letter {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(100%);
-  transition: transform 0.6s ease;
-  font-weight: 600;
-  color: #e63946;
-}
-
-.envelope-wrapper.open .flap {
-  transform: rotateX(180deg);
-}
-
-.envelope-wrapper.open .letter {
-  transform: translateY(0);
-}
-
-.hint {
-  margin-top: 16px;
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-
-.heart-burst {
+.hearts {
   position: absolute;
   top: 50%;
-  width: 100%;
-  pointer-events: none;
 }
 
 .heart {
   position: absolute;
-  font-size: 24px;
   animation: floatUp 1.2s ease-out forwards;
+  font-size: 24px;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
+  from {
+    transform: translateY(0);
     opacity: 1;
   }
-  100% {
-    transform: translateY(-120px) scale(1.4);
+  to {
+    transform: translateY(-120px);
     opacity: 0;
   }
 }
 
+/* ---------- ENVELOPE WRAPPER ---------- */
+
+.envelope-wrapper {
+  position: relative;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+/* ---------- ENVELOPE ---------- */
+
+.envelope {
+  width: 320px;
+  height: 200px;
+  position: relative;
+}
+
+.body {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 2px solid #e63946;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* ---------- FLAP ---------- */
+
+.flap {
+  position: absolute;
+  top: -2.5px;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: #d23c45;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 2;
+}
+
+.flap.open {
+  transform: rotateX(160deg);
+}
+
+/* ---------- LETTER ---------- */
+
+.letter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 280px;
+
+  padding: 18px 18px 24px; /* extra bottom padding */
+  background: white;
+  border-radius: 14px;
+
+  transform: translateX(-50%) translateY(60px);
+  opacity: 0;
+
+  transition: transform 0.7s ease, opacity 0.4s ease;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+   border: 2px solid rgba(0, 0, 0, 0.09);
+}
+
+.letter.show {
+  transform: translateX(-50%) translateY(-140px);
+  opacity: 1;
+}
+
+/* ---------- LETTER CONTENT ---------- */
+
+.letter-title {
+  font-weight: bold;
+  color: #e63946;
+  margin-bottom: 10px;
+}
+
+.letter p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+
+/* ---------- DOG IMAGE ---------- */
+
+.dog-pic {
+  width: 100%;
+  max-height: 180px;       /* prevents overflow */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ---------- HINT ---------- */
+
+.hint {
+  margin-top: 14px;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer {
+  position: fixed;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+  pointer-events: none; /* prevents accidental taps on mobile */
+}

@@ -1,19 +1,21 @@
 import { useState } from "react";
-import HeartBurst from "./HeartBurst";
 import "./App.css";
+import dogPic from "./assets/Finn.jpg"; // put dog.jpg in src/
 
-type Stage = "question" | "envelope" | "open";
-
-function App() {
-  const [stage, setStage] = useState<Stage>("question");
+export default function App() {
+  const [stage, setStage] = useState<"question" | "envelope">("question");
+  const [open, setOpen] = useState(false);
+  const [showHearts, setShowHearts] = useState(false);
   const [noPosition, setNoPosition] = useState({ top: "0px", left: "0px" });
-  const [isOpen, setIsOpen] = useState(false);
 
   const moveNoButton = () => {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 200 - 100;
 
-    setNoPosition({ left: `${x}px`, top: `${y}px` });
+    setNoPosition({
+      left: `${x}px`,
+      top: `${y}px`,
+    });
   };
 
   if (stage === "question") {
@@ -22,57 +24,76 @@ function App() {
         <h1>Will you be my Valentine? 💘</h1>
 
         <div className="buttons">
-          <button className="yes" onClick={() => setStage("envelope")}>
+          <button
+            className="yes"
+            onClick={() => {
+              setShowHearts(true);
+              setTimeout(() => setStage("envelope"), 500);
+            }}
+          >
             Yes 💖
           </button>
-
           <button
             className="no"
             onMouseEnter={moveNoButton}
-            style={{ position: "relative", ...noPosition }}
+            onTouchStart={moveNoButton} // important for iPhone
+            style={{
+              position: "relative",
+              ...noPosition,
+            }}
           >
             No 💔
           </button>
         </div>
-      </div>
-    );
-  }
 
-  if (stage === "envelope") {
-    return (
-      <div className="center">
-        <h1>You said YES 💌</h1>
-
-        {isOpen && <HeartBurst />}
-
-        <div
-          className={`envelope-wrapper ${isOpen ? "open" : ""}`}
-          onClick={() => {
-            if (!isOpen) setIsOpen(true);
-            else setStage("open");
-          }}
-        >
-          <div className="envelope">
-            <div className="flap" />
-            <div className="letter">
-              <p>For you ❤️</p>
-            </div>
+        {showHearts && (
+          <div className="hearts">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <span key={i} className="heart">💖</span>
+            ))}
           </div>
-        </div>
-
-        <p className="hint">
-          {isOpen ? "Tap again 💖" : "Click to open ✉️"}
-        </p>
+        )}
+        <footer className="footer">
+          Created by <strong>JacobBananalDev</strong> 💖
+        </footer>
       </div>
     );
   }
 
   return (
     <div className="center">
-      <h1>💘 Happy Valentine’s Day 💘</h1>
-      <p>You make every day better. I love you ❤️</p>
+
+      <div
+        className="envelope-wrapper"
+        onClick={() => setOpen(true)}
+      >
+        {/* LETTER (separate paper) */}
+        <div className={`letter ${open ? "show" : ""}`}>
+          <p className="letter-title">My Valentine 💖</p>
+          <p>
+            I’m so grateful for you and everything we share.
+            You make my days brighter, my laughs louder,
+            and my life better just by being in it.
+          </p>
+          <p>Will you be my Valentine — today and always? ❤️</p>
+
+          <img src={dogPic} alt="Her dog" className="dog-pic" />
+        </div>
+
+        {/* ENVELOPE */}
+        <div className="envelope">
+          <div className={`flap ${open ? "open" : ""}`} />
+          <div className="body" />
+        </div>
+      </div>
+
+      <p className="hint">
+        {open ? "💖" : "Tap to open ✉️"}
+      </p>
+
+      <footer className="footer">
+        Created by <strong>JacobBananalDev</strong> 💖
+      </footer>
     </div>
   );
 }
-
-export default App;
