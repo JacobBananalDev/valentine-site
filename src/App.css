@@ -147,7 +147,7 @@ button {
 }
 
 .letter.show {
-  transform: translateX(-50%) translateY(-140px);
+  transform: translateX(-50%) translateY(-10px);
   opacity: 1;
 }
 
